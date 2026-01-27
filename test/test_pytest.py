@@ -1,4 +1,12 @@
+import sys
+import os
 import pytest
+
+# Add src directory to path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
+
+
 from calculator import fun1, fun2, fun3, fun4, fun5, fun6
 
 
