@@ -1,0 +1,39 @@
+name: Python Unittests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code from repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      # Install project dependencies
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      # Run unittests
+      - name: Run unittests
+        run: python -m unittest test.test_unittest
+
+      # Notify on success
+      - name: Notify on success
+        if: success()
+        run: echo "Unit tests passed successfully"
+
+      # Notify on failure
+      - name: Notify on failure
+        if: failure()
+        run: echo "Unit tests failed"
